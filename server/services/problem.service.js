@@ -2,11 +2,12 @@ import ProblemModel from '../models/problem.model.js';
 import { addDays } from '../utils/date.js';
 
 
+
+
 export async function createProblem(data) {
 const problem = await ProblemModel.create(data);
 return problem;
 }
-
 
 export async function listProblems(query = {}) {
     const { pattern, difficulty, due } = query;
@@ -19,21 +20,17 @@ export async function listProblems(query = {}) {
     return ProblemModel.find(filter).sort({ updatedAt: -1 });
 }
 
-
 export async function getProblem(id) {
 return ProblemModel.findById(id);
 }
-
 
 export async function updateProblem(id, updates) {
 return ProblemModel.findByIdAndUpdate(id, updates, { new: true });
 }
 
-
 export async function deleteProblem(id) {
 return ProblemModel.findByIdAndDelete(id);
 }
-
 
 export async function addAttempt(id, attempt) {
 const problem = await ProblemModel.findById(id);
@@ -64,5 +61,5 @@ return problem;
 
 export async function dueToday() {
     const today = new Date();
-    return ProblemModel.find({ nextReviewDate: { $lte: today } }).sort({ nextReviewDate: 1 });
+    return ProblemModel.find({ nextReviewDate: { $lte: today } }).sort({ nextReviewDate: 1 }); 
 }
